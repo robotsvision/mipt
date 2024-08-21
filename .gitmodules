@@ -1,0 +1,3 @@
+[submodule "QE/external/llibs"]
+	path = QE/external/llibs
+	url = https://github.com/TheProjectL/llibs
