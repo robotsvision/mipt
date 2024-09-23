@@ -1,0 +1,20 @@
+[
+{
+  "directory": "C:/Projects/mipt/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -IC:/Projects/mipt/onegin/include -Wall -Wextra -pedantic -D DEBUG -o CMakeFiles\\onegin.dir\\src\\main.c.obj -c C:\\Projects\\mipt\\onegin\\src\\main.c",
+  "file": "C:\\Projects\\mipt\\onegin\\src\\main.c",
+  "output": "CMakeFiles\\onegin.dir\\src\\main.c.obj"
+},
+{
+  "directory": "C:/Projects/mipt/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -IC:/Projects/mipt/onegin/include -Wall -Wextra -pedantic -D DEBUG -o CMakeFiles\\onegin.dir\\src\\onegin.c.obj -c C:\\Projects\\mipt\\onegin\\src\\onegin.c",
+  "file": "C:\\Projects\\mipt\\onegin\\src\\onegin.c",
+  "output": "CMakeFiles\\onegin.dir\\src\\onegin.c.obj"
+},
+{
+  "directory": "C:/Projects/mipt/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -IC:/Projects/mipt/onegin/include -Wall -Wextra -pedantic -D DEBUG -o CMakeFiles\\onegin.dir\\src\\util\\logs.c.obj -c C:\\Projects\\mipt\\onegin\\src\\util\\logs.c",
+  "file": "C:\\Projects\\mipt\\onegin\\src\\util\\logs.c",
+  "output": "CMakeFiles\\onegin.dir\\src\\util\\logs.c.obj"
+}
+]

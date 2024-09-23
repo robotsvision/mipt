@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Projects/mipt/onegin/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -IC:/Projects/mipt/onegin/include -Wall -Wextra -pedantic -m64 -D DEBUG -o CMakeFiles\\onegin.dir\\src\\main.c.obj -c C:\\Projects\\mipt\\onegin\\src\\main.c",
+  "file": "C:\\Projects\\mipt\\onegin\\src\\main.c",
+  "output": "CMakeFiles\\onegin.dir\\src\\main.c.obj"
+},
+{
+  "directory": "C:/Projects/mipt/onegin/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -IC:/Projects/mipt/onegin/include -Wall -Wextra -pedantic -m64 -D DEBUG -o CMakeFiles\\onegin.dir\\src\\onegin.c.obj -c C:\\Projects\\mipt\\onegin\\src\\onegin.c",
+  "file": "C:\\Projects\\mipt\\onegin\\src\\onegin.c",
+  "output": "CMakeFiles\\onegin.dir\\src\\onegin.c.obj"
+},
+{
+  "directory": "C:/Projects/mipt/onegin/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -IC:/Projects/mipt/onegin/include -Wall -Wextra -pedantic -m64 -D DEBUG -o CMakeFiles\\onegin.dir\\src\\utf-8\\string.c.obj -c C:\\Projects\\mipt\\onegin\\src\\utf-8\\string.c",
+  "file": "C:\\Projects\\mipt\\onegin\\src\\utf-8\\string.c",
+  "output": "CMakeFiles\\onegin.dir\\src\\utf-8\\string.c.obj"
+},
+{
+  "directory": "C:/Projects/mipt/onegin/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -IC:/Projects/mipt/onegin/include -Wall -Wextra -pedantic -m64 -D DEBUG -o CMakeFiles\\onegin.dir\\src\\util\\flags.c.obj -c C:\\Projects\\mipt\\onegin\\src\\util\\flags.c",
+  "file": "C:\\Projects\\mipt\\onegin\\src\\util\\flags.c",
+  "output": "CMakeFiles\\onegin.dir\\src\\util\\flags.c.obj"
+},
+{
+  "directory": "C:/Projects/mipt/onegin/build",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -IC:/Projects/mipt/onegin/include -Wall -Wextra -pedantic -m64 -D DEBUG -o CMakeFiles\\onegin.dir\\src\\util\\logs.c.obj -c C:\\Projects\\mipt\\onegin\\src\\util\\logs.c",
+  "file": "C:\\Projects\\mipt\\onegin\\src\\util\\logs.c",
+  "output": "CMakeFiles\\onegin.dir\\src\\util\\logs.c.obj"
+}
+]
