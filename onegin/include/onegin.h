@@ -17,6 +17,6 @@
  * @param[in] argv argument values
  * @return execution status. in `int main()`
  */
-int onegin_init(int argc, const char* argv[]);
+int onegin_run(int argc, const char* argv[]);
 
 #endif // ONEGIN_H_

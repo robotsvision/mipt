@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdint.h>
 #include <stdio.h>
 
 #define _COMPARE_GENERIC(op, arg1, arg2)\
@@ -65,6 +66,19 @@ void _lqsort(int* base, size_t left, size_t right, int(*compare_func)(int, int))
 
 void lqsort(int* base, int num_of_elements, int(*compare_func)(int, int)) {
     _lqsort(base, 0, num_of_elements, compare_func);
+}
+
+void _onegin_qsort_swap(void* data1, void* data2, size_t size) {
+
+    uint8_t* casted_data1 = (uint8_t*)(data1);
+    uint8_t* casted_data2 = (uint8_t*)(data2);
+    uint8_t temp;
+
+    for (size_t i = 0; i < size; ++i) {
+        temp = casted_data1[i];
+        casted_data1[i] = casted_data2[i];
+        casted_data2[i] = temp;
+    }
 }
 
 void _onegin_qsort_rec(
