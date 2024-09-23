@@ -1,4 +1,4 @@
-C:/Projects/mipt/onegin/build/CMakeFiles/onegin.dir
-C:/Projects/mipt/onegin/build/CMakeFiles/Generate_assembly.dir
-C:/Projects/mipt/onegin/build/CMakeFiles/edit_cache.dir
-C:/Projects/mipt/onegin/build/CMakeFiles/rebuild_cache.dir
+/home/robotsvision/projects/mipt/onegin/build/CMakeFiles/onegin.dir
+/home/robotsvision/projects/mipt/onegin/build/CMakeFiles/Generate_assembly.dir
+/home/robotsvision/projects/mipt/onegin/build/CMakeFiles/edit_cache.dir
+/home/robotsvision/projects/mipt/onegin/build/CMakeFiles/rebuild_cache.dir
