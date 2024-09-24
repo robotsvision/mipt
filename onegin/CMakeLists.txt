@@ -6,16 +6,16 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_FLAGS "-Wall -Wextra -pedantic -m64")
+set(CMAKE_C_FLAGS "-Wall -Wextra -pedantic -m64") # TODO: Ded flags? (sanitizers)
 set(CMAKE_C_FLAGS_DEBUG "-D DEBUG")
-set(CMAKE_C_FLAGS_RELEASE "-O3")
+set(CMAKE_C_FLAGS_RELEASE "-O3") # TODO: Why -O3?
 set(CMAKE_EXE_LINKER_FLAGS "-m64")
 
-include_directories(include/)
+include_directories(include/) # TODO: Why not target_include_directories?
 file(GLOB_RECURSE ONEGIN_SRC "src/*.c")
 
 include_directories(native/${CMAKE_SYSTEM_NAME}/include/)
-file(GLOB_RECURSE ONEGIN_NATIVE_SRC "native/${CMAKE_SYSTEM_NAME}/src/*.c")
+file(GLOB_RECURSE ONEGIN_NATIVE_SRC "native/${CMAKE_SYSTEM_NAME}/src/*.c") # TODO: I heard globs are discouraged, why?
 
 add_executable(onegin ${ONEGIN_SRC} ${ONEGIN_NATIVE_SRC})
 

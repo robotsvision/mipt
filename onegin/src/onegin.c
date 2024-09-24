@@ -22,5 +22,5 @@ int onegin_run(int argc, const char* argv[]) {
     utf8_string_t mem_block1 = calloc(utf8_len(string1), sizeof(char));
     utf8_string_t mem_block2 = calloc(utf8_len(string2), sizeof(char));
 
-    return EXIT_SUCCESS;
+    return EXIT_SUCCESS; // TODO: memory leak?
 }
