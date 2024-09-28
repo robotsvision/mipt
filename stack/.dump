@@ -1,0 +1,15 @@
+stack[0x005260] at main.c:52 born at main.c:12 (main)
+
+{
+    size = 3
+    capacity = 5
+
+    data [0xFF3960]:
+    {
+         *  [0] = 10
+         *  [1] = 20
+         *  [2] = 30
+            [3] = -666 (POISON)
+            [4] = -666 (POISON)
+    }
+}

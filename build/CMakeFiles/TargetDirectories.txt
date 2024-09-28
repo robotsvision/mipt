@@ -1,0 +1,3 @@
+C:/Projects/mipt/build/CMakeFiles/onegin.dir
+C:/Projects/mipt/build/CMakeFiles/edit_cache.dir
+C:/Projects/mipt/build/CMakeFiles/rebuild_cache.dir
