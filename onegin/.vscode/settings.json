@@ -1,6 +1,12 @@
 {
     "files.associations": {
         "*.txt": "plaintext",
-        "utf8.h": "c"
+        "bit": "cpp",
+        "compare": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "cstdlib": "cpp",
+        "onegin.h": "c",
+        "flags.h": "c"
     }
 }

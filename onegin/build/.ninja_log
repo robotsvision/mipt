@@ -1,10 +1,8 @@
-# ninja log v6
-8	56	7488245204249342	CMakeFiles/onegin.dir/src/main.c.obj	3bf69f563cf03dc
-14	75	7488245204309233	CMakeFiles/onegin.dir/src/types/utf8.c.obj	7e6a7ed601793b73
-10	17	7488245183286554	clean	139b443fbd37261f
-11	75	7488245204279192	CMakeFiles/onegin.dir/src/onegin.c.obj	21d5b11dec6b151a
-17	71	7488245204329207	CMakeFiles/onegin.dir/src/util/flags.c.obj	14002ff4102f00c3
-20	90	7488245204359226	CMakeFiles/onegin.dir/src/util/logs.c.obj	143c9c58838a5c4d
-90	163	7488245205069210	onegin.exe	950ed0d0a8e6e432
-4	592	7488245898340498	CMakeFiles/onegin.dir/native/Windows/src/map_io.c.obj	6858fc09bdcb372e
-594	686	7488245904235687	onegin.exe	4b4d44fe6d38f910
+# ninja log v5
+1	28	1728333736286201203	CMakeFiles/onegin.dir/src/main.c.o	43cd33451d30ab0a
+44	86	1728332241332845954	onegin	adf22b9882b5a855
+1	37	1728333736294201088	CMakeFiles/onegin.dir/src/onegin.c.o	8dfa77d1a2a1d724
+1	36	1728333798975298813	CMakeFiles/onegin.dir/src/main.c.o	76dd5b1a025212b5
+1	40	1728333798979298755	CMakeFiles/onegin.dir/src/onegin.c.o	7c15f93d20f47997
+0	26	1728333812889098546	CMakeFiles/onegin.dir/src/util/files.c.o	69853e52d249b801
+26	62	1728333812924098042	onegin	cf08ad3959fd64e7

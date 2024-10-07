@@ -1,5 +1,5 @@
 #include <onegin.h>
 
-int main(int argc, const char* argv[]) {
-    return onegin_run(argc, argv); // TODO: Why?
-}
+int main(const int argc, const char* argv[]) {
+    return EXIT_SUCCESS;
+} 
