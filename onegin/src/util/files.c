@@ -8,4 +8,5 @@ void* ofopen(ofile_t* file, const char* filename);
 #else
 
 
+
 #endif

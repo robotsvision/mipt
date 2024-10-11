@@ -1,8 +1,5 @@
 # ninja log v5
-1	28	1728333736286201203	CMakeFiles/onegin.dir/src/main.c.o	43cd33451d30ab0a
-44	86	1728332241332845954	onegin	adf22b9882b5a855
-1	37	1728333736294201088	CMakeFiles/onegin.dir/src/onegin.c.o	8dfa77d1a2a1d724
-1	36	1728333798975298813	CMakeFiles/onegin.dir/src/main.c.o	76dd5b1a025212b5
-1	40	1728333798979298755	CMakeFiles/onegin.dir/src/onegin.c.o	7c15f93d20f47997
+0	31	1728337973669389704	CMakeFiles/onegin.dir/src/main.c.o	76dd5b1a025212b5
+34	69	1728338569034308872	onegin	cf08ad3959fd64e7
+0	34	1728338569000305512	CMakeFiles/onegin.dir/src/onegin.c.o	7c15f93d20f47997
 0	26	1728333812889098546	CMakeFiles/onegin.dir/src/util/files.c.o	69853e52d249b801
-26	62	1728333812924098042	onegin	cf08ad3959fd64e7

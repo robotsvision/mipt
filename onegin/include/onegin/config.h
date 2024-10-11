@@ -8,11 +8,7 @@
  * @date     07. October 2024
  * @author   Matvey Rybalkin
  ******************************************************************************/
-
-/*************************************************************
-* CONFIGURATION
-************************************************************/
-
+ELIX_H_
 typedef enum {
     ONEGIN_APP_CONSOLE,
     ONEGIN_APP_GUI,
@@ -28,9 +24,9 @@ typedef enum {
 
 typedef struct {
     oapp_t app;
-    char* input_filename;
+    const char* input_filename;
     osort_t sort;
-    char* output_filename;
+    const char* output_filename;
     bool original;
 } oconf_t;
 

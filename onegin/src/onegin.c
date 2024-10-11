@@ -1,5 +1,7 @@
 #include <onegin.h>
+#include <util/types.h>
 #include <util/flags.h>
+#include <string.h>
 
 #define ONEGIN_ARG_TOO_SHORT    0x02
 #define ONEGIN_ARG_INVALID      0x03
@@ -30,7 +32,7 @@ oerror_t onegin_configurate(oconf_t* conf, int argc, const char* argv[]) {
     
     (*conf) = (oconf_t){
         .input_filename = NULL,
-        .sort = ONEGIN_UNDEFINED,
+        .sort = ONEGIN_SORT_FORAWRD,
         .output_filename = NULL,
         .original = false,
     };
@@ -39,12 +41,11 @@ oerror_t onegin_configurate(oconf_t* conf, int argc, const char* argv[]) {
         conf->app = ONEGIN_APP_GUI;
         return ONEGIN_OK;
     } else {
-        
         for (int i = 1; i < argc; ++i) {
             static oflag_io_dir_t dir = ONEGIN_INPUT;
-            char* flag = argv[i];
+            const char* flag = argv[i];
             size_t len = strlen(flag);
-            if (len < 3) {
+            if (len < 2) {
                 return ONEGIN_ARG_TOO_SHORT;
             }
             if (is_double_dash(flag)) {
@@ -52,7 +53,7 @@ oerror_t onegin_configurate(oconf_t* conf, int argc, const char* argv[]) {
                     if (strcmp(flag + 2, _flag_map[i]) == 0) {
                         switch (i) {
                         case ONEGIN_FLAG_HELP:
-                            _onegin_version();
+                            _onegin_help();
                             exit(EXIT_SUCCESS);
                         case ONEGIN_FLAG_VERSION:
                             _onegin_version();
@@ -80,9 +81,9 @@ oerror_t onegin_configurate(oconf_t* conf, int argc, const char* argv[]) {
             } else {
                 // it must be a file
                 if (dir == ONEGIN_INPUT) {
-                    conf->input_filename  = argv[i];
+                    conf->input_filename  = flag;
                 } else {
-                    conf->output_filename = argv[i];
+                    conf->output_filename = flag;
                 }
             }
         }
@@ -100,8 +101,8 @@ const char* _help_message =
 "Options:\n"
 "  --help                   Show this help message and exit.\n"
 "  --version                Show version information and exit.\n"
-"  --forward                Sort lines of text in forward alphabetical order.\n"
-"  --reverse                Sort lines of text in reverse alphabetical order.\n"
+"  --forward                Sort the words of the poem by direct comparison.\n"
+"  --reverse                Sort the words of the poem by reverse comparison.\n"
 "  --original               Output the text in its original order without sorting.\n"
 "  --interactive            Run the application in interactive console mode.\n"
 "  -i <file>                Specify the input file (e.g., -i input.txt).\n"
@@ -128,7 +129,8 @@ void _onegin_version(void) {
     printf (
 "Onegin. Version: %s\n\
 License: Unlicense.\n\
-Read 'license' file for more", 
+Read 'license' file for more\n\
+Author: Matvey Rybalkin / aka @robotsvision", 
     ONEGIN_VERSION_CSTR
     );
 }

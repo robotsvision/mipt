@@ -1,0 +1,7 @@
+/home/robotsvision/Projects/MIPT/mipt/stack/examples/build/CMakeFiles/dump.dir
+/home/robotsvision/Projects/MIPT/mipt/stack/examples/build/CMakeFiles/edit_cache.dir
+/home/robotsvision/Projects/MIPT/mipt/stack/examples/build/CMakeFiles/rebuild_cache.dir
+/home/robotsvision/Projects/MIPT/mipt/stack/build/CMakeFiles/stack.dir
+/home/robotsvision/Projects/MIPT/mipt/stack/build/CMakeFiles/stack++.dir
+/home/robotsvision/Projects/MIPT/mipt/stack/build/CMakeFiles/edit_cache.dir
+/home/robotsvision/Projects/MIPT/mipt/stack/build/CMakeFiles/rebuild_cache.dir

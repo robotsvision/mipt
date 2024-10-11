@@ -1,5 +1,8 @@
 #include <stack.h>
-#include <stack_conf.h>
+#include <stack/conf.h>
+
+#include <stdlib.h>
+#include <stdint.h>
 
 /*************************************************************
  * Private
@@ -9,13 +12,12 @@
  * @brief Initialize stack, and allocate basic claster.
  * 
  */
-int _stack_init(stack_t* stack){
-    void* data = calloc(STACK_CLASTER_SIZE, 1ULL);
+stack_t _stack_init(void) {
+    stacK_t st = (stack_t){.sp = NULL};
+    void* data = calloc(_STACK_INITIAL_SIZE, 1);
     if (data == NULL) {
-        return -1;
+        return st;
     }
-    stack->sp = data;
-    stack->size = STACK_CLASTER_SIZE;
     
 }
 
@@ -36,7 +38,9 @@ int _stack_push1   (
                     stack_t* stack,
                     const int8_t data, 
                     stack_data_type_t type
-                    ){}
+                    ) {
+                    
+}
 
 /**
  * @brief Add two byte element to stack with typization
@@ -51,7 +55,9 @@ int _stack_push2   (
                     stack_t* stack, 
                     const int16_t data, 
                     stack_data_type_t type
-                    ){}
+                    ) {
+
+}
 
 /**
  * @brief Add four byte element to stack with typization
@@ -66,7 +72,8 @@ int _stack_push4   (
                     stack_t* stack, 
                     int32_t data, 
                     stack_data_type_t type
-                    ){}
+                    ) {
+}
 
 /**
  * @brief Add eight byte element to stack with typization
@@ -81,7 +88,10 @@ int _stack_push8   (
                     stack_t* stack, 
                     const int64_t data, 
                     stack_data_type_t type
-                    ){}
+                    ) {
+
+
+}
 
 /**
  * @brief Add pointer for any data. 
@@ -91,4 +101,11 @@ int _stack_push8   (
  * @param[out] type
  * @returns `0` in success, or `-1` if an error occurs
  */
-int _stack_push_ptr(stack_t* stack, void* data, stack_data_type_t type){}
+int _stack_push_ptr(stack_t* stack, void* data, stack_data_type_t type) {
+
+}
+
+
+stack_error_t stack_deinit(stack_t* _s) {
+
+}
