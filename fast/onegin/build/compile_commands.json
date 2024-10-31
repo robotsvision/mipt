@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/robotsvision/Projects/MIPT/mipt/fast/onegin/build",
+  "command": "/run/current-system/sw/bin/gcc -g -o CMakeFiles/onegin.dir/main.c.o -c /home/robotsvision/Projects/MIPT/mipt/fast/onegin/main.c",
+  "file": "/home/robotsvision/Projects/MIPT/mipt/fast/onegin/main.c",
+  "output": "CMakeFiles/onegin.dir/main.c.o"
+}
+]
