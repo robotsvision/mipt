@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/robotsvision/Projects/MIPT/mipt/fast/stack/build",
+  "command": "/run/current-system/sw/bin/gcc -g -o CMakeFiles/stack_example.dir/stack_static.c.o -c /home/robotsvision/Projects/MIPT/mipt/fast/stack/stack_static.c",
+  "file": "/home/robotsvision/Projects/MIPT/mipt/fast/stack/stack_static.c",
+  "output": "CMakeFiles/stack_example.dir/stack_static.c.o"
+}
+]

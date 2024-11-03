@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/robotsvision/Projects/MIPT/mipt/fast/processor/build",
+  "command": "/run/current-system/sw/bin/gcc -g -o CMakeFiles/risc.dir/stack.c.o -c /home/robotsvision/Projects/MIPT/mipt/fast/processor/stack.c",
+  "file": "/home/robotsvision/Projects/MIPT/mipt/fast/processor/stack.c",
+  "output": "CMakeFiles/risc.dir/stack.c.o"
+},
+{
+  "directory": "/home/robotsvision/Projects/MIPT/mipt/fast/processor/build",
+  "command": "/run/current-system/sw/bin/gcc -g -o CMakeFiles/risc.dir/risc.c.o -c /home/robotsvision/Projects/MIPT/mipt/fast/processor/risc.c",
+  "file": "/home/robotsvision/Projects/MIPT/mipt/fast/processor/risc.c",
+  "output": "CMakeFiles/risc.dir/risc.c.o"
+}
+]

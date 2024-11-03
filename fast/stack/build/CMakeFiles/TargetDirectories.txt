@@ -1,0 +1,3 @@
+/home/robotsvision/Projects/MIPT/mipt/fast/stack/build/CMakeFiles/stack_example.dir
+/home/robotsvision/Projects/MIPT/mipt/fast/stack/build/CMakeFiles/edit_cache.dir
+/home/robotsvision/Projects/MIPT/mipt/fast/stack/build/CMakeFiles/rebuild_cache.dir
