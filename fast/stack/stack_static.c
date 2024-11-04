@@ -13,7 +13,7 @@
 
 typedef int32_t stack_element_t;
 
-#define STACK_NO_DATA MAP_FAILED // кринж
+#define STACK_NO_DATA MAP_FAILED // кринж // TODO: This should be 0 to catch things like stack_t stack = {};
 
 typedef struct {
     stack_element_t* data;
@@ -54,7 +54,7 @@ int stack_deinit(stack_t* stack) {
     return 0;
 }
 
-int stack_strip(stack_t* stack) {
+int stack_strip(stack_t* stack) { // TODO: shrink?
     if (stack == NULL || stack->data == STACK_NO_DATA)
         return -1;
     if (stack->used < (size_t)(0.25 * stack->capacity)) {
@@ -78,7 +78,7 @@ int stack_strip(stack_t* stack) {
     }
 }
 
-int stack_expand(stack_t* stack) {
+int stack_expand(stack_t* stack) { // TODO: is it the same as strip? Also, "expand" sounds like it always does expansion
     if (stack == NULL || stack->data == STACK_NO_DATA)
         return -1;
 
@@ -99,6 +99,12 @@ int stack_expand(stack_t* stack) {
             .data = new_memory,
             .capacity = new_capacity
             // used не изменяется
+            // TODO: this will set used to 0
+
+            // TODO: gde testi lebowski?
+            // for (int i = 0; i < 128; ++ i) push(&stack, 5);
+            // push(&stack, 42);
+            // ASSERT(back(&stack) == 42); // TODO: WOW, FAILURE
         };
     }
     return 0;
@@ -106,14 +112,14 @@ int stack_expand(stack_t* stack) {
 
 int stack_push(stack_t* stack, stack_element_t element) {
     stack->data[stack->used++] = element;
-    stack_expand(stack);
+    stack_expand(stack); // TODO: why add more space at the end? You will always overshoot.
 }
 
 int stack_pop(stack_t* stack, stack_element_t* dest) {
     if (stack == NULL || stack->data == STACK_NO_DATA)
         return -1;
-    if (stack->capacity == 0)
-        return 1;
+    if (stack->capacity == 0) // TODO: capacity not used?
+        return 1; // TODO: 1, -1, why, magick const?
 
     (*dest) = stack->data[--stack->used];
     stack_strip(stack);

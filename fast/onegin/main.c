@@ -2,7 +2,7 @@
  * Быстрый Онегин.
  * 
  * onegin (или onegin --interactive)            => Интерактивный режим
- * onegin --quiet -i onegin.txt -o out.txt     => Тихий режим приложения
+ * onegin --quiet -i onegin.txt -o out.txt     => Тихий режим приложения // TODO: delete incorrect comments
  *
  * Ограничения:
  *  *   Работает только с ASCII или любой другой однобайтовой кодировкой.
@@ -18,9 +18,22 @@
  */
 
 
+// TODO: compile with pedantic flags, they are your friend:
+
+// These are common flags:
+// clang++ -D _DEBUG -ggdb3 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wchar-subscripts -Wctor-dtor-privacy -Wempty-body -Wfloat-equal -Wformat-nonliteral -Wformat-security -Wformat=2 -Winline -Wnon-virtual-dtor -Woverloaded-virtual -Wpacked -Wpointer-arith -Wredundant-decls -Wsign-promo -Wstrict-overflow=2 -Wsuggest-override -Wswitch-default -Wswitch-enum -Wundef -Wunreachable-code -Wunused -Wvariadic-macros -Wno-missing-field-initializers -Wno-narrowing -Wno-old-style-cast -Wno-varargs -fcheck-new -fsized-deallocation -fstack-check -fstack-protector -fstrict-overflow -fno-omit-frame-pointer -fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr -O0 
+
+// And for gcc you can add a few more flags:
+// gcc -D _DEBUG -ggdb3 -Wall -Wextra -Weffc++ -Wcast-align -Wcast-qual -Wchar-subscripts -Wctor-dtor-privacy -Wempty-body -Wfloat-equal -Wformat-nonliteral -Wformat-security -Wformat=2 -Winline -Wnon-virtual-dtor -Woverloaded-virtual -Wpacked -Wpointer-arith -Wredundant-decls -Wsign-promo -Wstrict-overflow=2 -Wsuggest-override -Wswitch-default -Wswitch-enum -Wundef -Wunreachable-code -Wunused -Wvariadic-macros -Wno-missing-field-initializers -Wno-narrowing -Wno-old-style-cast -Wno-varargs -fcheck-new -fsized-deallocation -fstack-check -fstack-protector -fstrict-overflow -fno-omit-frame-pointer -fsanitize=address,alignment,bool,bounds,enum,float-cast-overflow,float-divide-by-zero,integer-divide-by-zero,leak,nonnull-attribute,null,object-size,return,returns-nonnull-attribute,shift,signed-integer-overflow,undefined,unreachable,vla-bound,vptr -O0 -Waggressive-loop-optimizations -Wconditionally-supported -Wformat-signedness -Wlogical-op -Wopenmp-simd -Wstrict-null-sentinel -Wsuggest-attribute=noreturn -Wsuggest-final-methods -Wsuggest-final-types -Wsync-nand -Wuseless-cast -fconcepts-diagnostics-depth=3 -Wno-literal-suffix
+
+
 /**************************************************************************************************/
 
+// TODO: like this:
+#include <assert.h>
 #ifdef __linux__
+#   error "Приложение создано только для Linux."
+#endif
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -98,17 +111,13 @@ onegin_error_t onegin_interactive(void);
 onegin_error_t onegin_quiet(app_args_t args);
 
 int main(const int argc, const char* argv[]) {
-
-    // Application state
-    onegin_error_t status = 0;
-
-    if (argc == 1) {
+   if (argc == 1) {
         /**
          * It must be interactive mode.
          */
-        status = onegin_interactive();
+        onegin_error_t status = onegin_interactive();
 
-        if (status != ONEGIN_OK) {
+        if (status != ONEGIN_OK) { // TODO: isn't this an important construct that should be extracted?
             perror(onegin_errors[status]);
             return EXIT_FAILURE;
         } else {
@@ -122,10 +131,23 @@ int main(const int argc, const char* argv[]) {
             .value = (argv + 1),
         };
 
-        status = onegin_quiet(args);
+        onegin_error_t status = onegin_quiet(args);
 
         // ...
     }
+
+    // TODO: this might be better:
+    //
+    // parse_args()
+    // if (interactive)
+    //     status = onegin_interactive()
+    // else
+    //     status = onegin_quiet()
+    //
+    // if (is_error(status)) {
+    //     perror(...)
+    //     return EXIT_FAILURE;
+    // }
 
     return EXIT_SUCCESS;
 }
@@ -133,6 +155,7 @@ int main(const int argc, const char* argv[]) {
 /**************************************************************************************************/
 /**************************************************************************************************/
 
+// TODO: why use _Generic?
 #define _COMPARE_GENERIC(op, arg1, arg2)\
     _Generic((arg1), \
         default:    ((arg1) op (arg2) ? (arg1) : (arg2)) \
@@ -141,7 +164,9 @@ int main(const int argc, const char* argv[]) {
 #define MIN(a, b)  _COMPARE_GENERIC(<, a, b)
 #define MAX(a, b)  _COMPARE_GENERIC(>, a, b)
 
+// TODO: argument names?
 void onegin_qsort(void*, size_t, size_t, int(*compare_func)(const void*, const void*));
+
 char** onegin_parse_text(char* text, size_t* lines);
 void onegin_delete_blanks_text(char* text);
 
@@ -149,10 +174,28 @@ int strcmp_forward(const char* str1, const char* str2) {
     int len = MIN(strlen(str1), strlen(str2));
     int D = 0;
     for (int i = 0; i < len; ++i) {
+        // TODO: this is the weirdest thing I've seen in my entire life
+        // It doesn't compare things properly ba < am also ab == ba
+
+        // And not even basic properties like assiciativity hold for it:
+        // bby < cc < dda, but bby > dda
+
+        // So the sort order will depend on order of access which is wild
         D += str1[i] - str2[i];
     }
+
     return D;
 }
+
+// TODO: strcmp should look more like:
+// int strcmp(const char* str1, const char* str2) {
+//     while (*str1 == *str2 && *str1 != '\0' && *str2 != '\0') {
+//         ++ str1;
+//         ++ str2;
+//     }
+// 
+//     return *str1 - *str2;
+// }
 
 int strcmp_backward(const char* str1, const char* str2) {
     int len1 = strlen(str1);
@@ -187,16 +230,19 @@ const char* interactive_intro_msg = \
 " |                             | \n"
 " #-----------------------------# \n";
 
-const char* interactive_intro_input_msg
-= "# Введите название входного файла -> ";
-const char* interactive_intro_sort_msg
-= "# Тип сортировки ? Прямая или обратная. [forward/backward] -> ";
-const char* interactive_intro_output_msg
-= "# Куда вывести результат? Введите Enter чтобы вывести в консоль, или же укажите путь к файлу-> ";
-const char* interactive_intro_origin_msg 
-= "# Желаете увидеть оригинальный текст? [y/n]";
-const char* interactive_outro_msg 
-= "# Нажмите любую клавишу....";
+const char* interactive_intro_input_msg =
+    "# Введите название входного файла -> ";
+
+const char* interactive_intro_sort_msg =
+    "# Тип сортировки ? Прямая или обратная. [forward/backward] -> ";
+
+const char* interactive_intro_output_msg =
+    "# Куда вывести результат? "
+    "Введите Enter чтобы вывести в консоль, или же укажите путь к файлу-> ";
+
+const char* interactive_intro_origin_msg = "# Желаете увидеть оригинальный текст? [y/n]";
+
+const char* interactive_outro_msg = "# Нажмите любую клавишу....";
 
 const char* sort_forward_str = "forward";
 const char* sort_backward_str = "backward";
@@ -212,17 +258,20 @@ onegin_error_t onegin_interactive(void) {
     /////////////////////////////////////////////
     puts(interactive_intro_msg); // объединить?
     puts(interactive_intro_input_msg);
+    // TODO: extract, greet? help?
 
-    char console_input_buffer[CONSOLE_INPUT_BUFFER_SIZE];
+
+    char console_input_buffer[CONSOLE_INPUT_BUFFER_SIZE]; // = {};
     memset(console_input_buffer, '\0', CONSOLE_INPUT_BUFFER_SIZE);
 
-    scanf(SCANF_INPUT_BUFFER_FORMAT, console_input_buffer);
+    scanf(SCANF_INPUT_BUFFER_FORMAT, console_input_buffer); // TODO: 100 symbols require 101 byte
     
     if (strlen(console_input_buffer) < MIN_FILE_LEN) {
         return ONEGIN_ERROR_INVALID_FILE;
     }
         
-    int file_descr = open(console_input_buffer, O_RDONLY);
+    // TODO: can be a part of read_file?
+    int file_descr = open(console_input_buffer, O_RDONLY); // TODO: file_descr? descr?
 
     // Ошибка. Не удалось открыть файл. Неверный путь.
     if (file_descr < 0) {
@@ -230,7 +279,7 @@ onegin_error_t onegin_interactive(void) {
     }
         
 
-    struct stat file_info = (const struct stat){0};
+    struct stat file_info = (const struct stat){0}; // TODO: extract, read_file_size
     fstat(file_descr, &file_info);
     size_t file_size = file_info.st_size;
 
@@ -239,7 +288,7 @@ onegin_error_t onegin_interactive(void) {
         close(file_descr);
         return ONEGIN_ERROR_INVALID_FILE;
     }
-        
+        // < TODO: more trailing spaces
 
     char* input_file_buffer = calloc(file_size + 1, sizeof(char));
 
@@ -250,7 +299,7 @@ onegin_error_t onegin_interactive(void) {
     }
 
     // Ошибка. Не удалось прочесть содержимое.
-    if (read(file_descr, input_file_buffer, file_size) < 0) {
+    if (read(file_descr, input_file_buffer, file_size) < 0) { // TODO: is it faster to read 4096 bytes in a loop?
         free(input_file_buffer);
         close(file_descr);
         return ONEGIN_ERROR_INTERNAL;   
@@ -335,7 +384,7 @@ onegin_error_t onegin_interactive(void) {
 
             fclose(output_file_descr);
         }
-    }
+    } // TODO: else what? Just do what we would otherwise? Weird.
     
 
     /////////////////////////////////////////////
@@ -361,6 +410,9 @@ onegin_error_t onegin_interactive(void) {
     puts(interactive_outro_msg);
     getchar();
     getchar();
+
+
+    // TODO: return?
 }
 
 /////////////////////////////////////////////
@@ -369,6 +421,7 @@ onegin_error_t onegin_interactive(void) {
 
 onegin_error_t onegin_quiet(app_args_t args) {
     // не нужен )
+    // TODO: return?
 }
 
 /////////////////////////////////////////////
@@ -382,7 +435,7 @@ void _onegin_qsort_swap(void* data1, void* data2, size_t size) {
     uint8_t temp;
 
     for (size_t i = 0; i < size; ++i) {
-        temp = casted_data1[i];
+        temp = casted_data1[i]; // TODO: why not create it here?
         casted_data1[i] = casted_data2[i];
         casted_data2[i] = temp;
     }
@@ -408,9 +461,9 @@ void _onegin_qsort_rec(
             j--;
         }
 
-        if (i <= j) {
+        if (i <= j) { // TODO: i >= j return, why swap when indicies are equal?
             _onegin_qsort_swap((char*)base + i * size_of_element, (char*)base + j * size_of_element, size_of_element);
-            i++;
+            i++; // TODO: j <= right?
             if (j > 0) j--;
         }
     }
@@ -437,11 +490,12 @@ void onegin_delete_blanks_text(char* text) {
     }
 
     char *write_ptr = text;
-    bool is_newline = false;
+    bool is_newline = false; // TODO: why only delete them when there are 2 in a row?
+                             //       in a sorted text they will be near anyway.
 
     while ((*text) != '\0') {
         if ((*text) == '\n') {
-            if (!is_newline) {
+            if (!is_newline) { // TODO: \n\n -- you will skip the first one but not the second
                 *(write_ptr++) = (*text);
                 is_newline = true;
             }
@@ -449,7 +503,7 @@ void onegin_delete_blanks_text(char* text) {
             *(write_ptr++) = (*text);
             is_newline = false;
         }
-        text++;
+        text++; // TODO: for loop?
     }
 
     *write_ptr = '\0';
@@ -461,7 +515,7 @@ char** onegin_parse_text(char* text, size_t* lines) {
     }
 
     char* text_ptr = text;
-    size_t _lines = 0;
+    size_t _lines = 0; // TODO: _lines?
     do {
         text_ptr = strchr(text_ptr, '\n');
         if (text_ptr == NULL) {
@@ -484,7 +538,3 @@ char** onegin_parse_text(char* text, size_t* lines) {
 
     return text_lines;
 }
-
-#else
-#   error "Приложение создано только для Linux."
-#endif
