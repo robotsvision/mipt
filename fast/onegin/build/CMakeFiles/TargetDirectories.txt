@@ -1,0 +1,3 @@
+/home/robotsvision/Projects/MIPT/mipt/fast/onegin/build/CMakeFiles/onegin.dir
+/home/robotsvision/Projects/MIPT/mipt/fast/onegin/build/CMakeFiles/edit_cache.dir
+/home/robotsvision/Projects/MIPT/mipt/fast/onegin/build/CMakeFiles/rebuild_cache.dir

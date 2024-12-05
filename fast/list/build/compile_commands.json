@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/robotsvision/Projects/MIPT/mipt/fast/list/build",
+  "command": "/run/current-system/sw/bin/gcc -I/home/robotsvision/Projects/MIPT/mipt/fast/list/include -g -o CMakeFiles/list.dir/src/list.c.o -c /home/robotsvision/Projects/MIPT/mipt/fast/list/src/list.c",
+  "file": "/home/robotsvision/Projects/MIPT/mipt/fast/list/src/list.c",
+  "output": "CMakeFiles/list.dir/src/list.c.o"
+}
+]

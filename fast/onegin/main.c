@@ -31,7 +31,7 @@
 
 // TODO: like this:
 #include <assert.h>
-#ifdef __linux__
+#ifndef __linux__
 #   error "Приложение создано только для Linux."
 #endif
 

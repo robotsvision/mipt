@@ -1,0 +1,3 @@
+/home/robotsvision/Projects/MIPT/mipt/fast/akinator/build/CMakeFiles/akinator.dir
+/home/robotsvision/Projects/MIPT/mipt/fast/akinator/build/CMakeFiles/edit_cache.dir
+/home/robotsvision/Projects/MIPT/mipt/fast/akinator/build/CMakeFiles/rebuild_cache.dir

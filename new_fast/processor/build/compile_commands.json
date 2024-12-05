@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/robotsvision/Projects/MIPT/mipt/new_fast/processor/build",
+  "command": "/run/current-system/sw/bin/clang -I/home/robotsvision/Projects/MIPT/mipt/new_fast/processor/disassembler/include -I/home/robotsvision/Projects/MIPT/mipt/new_fast/processor/include -fdiagnostics-color=always -g -o CMakeFiles/disassembler.dir/disassembler/src/disassembler.c.o -c /home/robotsvision/Projects/MIPT/mipt/new_fast/processor/disassembler/src/disassembler.c",
+  "file": "/home/robotsvision/Projects/MIPT/mipt/new_fast/processor/disassembler/src/disassembler.c",
+  "output": "CMakeFiles/disassembler.dir/disassembler/src/disassembler.c.o"
+}
+]
