@@ -1,4 +1,4 @@
-#include <instructions.h>
+#include <cpu_arch.h>
 
 static const char* _instruction_map[_PROCESSOR_OPCODE_NUM] = {
     [PROCESSOR_OPCODE_NOP]      = "nop",

@@ -2,7 +2,16 @@
     "files.associations": {
         "*.txt": "plaintext",
         "system_error": "cpp",
-        "disassembler.h": "c"
+        "disassembler.h": "c",
+        "stdio.h": "c",
+        "cpu_arch.h": "c",
+        "array": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "iterator": "c",
+        "string_view": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

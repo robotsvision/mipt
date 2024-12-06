@@ -11,12 +11,12 @@ set(CMAKE_CXX_FLAGS_RELEASE_INIT ${PROCESSOR_GENERAL_FLAGS})
 # -------------------------------------------------------
 
 add_library(disassembler STATIC
-    "disassembler/src/disassembler.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/disassembler/src/disassembler.c"
 )
 
 target_include_directories(disassembler PUBLIC
-    "disassembler/include/"
-    "include/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/disassembler/include/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/"
 )
 
 # -------------------------------------------------------

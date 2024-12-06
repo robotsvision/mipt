@@ -9,7 +9,7 @@
  * @author   Matvey Rybalkin
 ******************************************************************************/
 
-#include <instructions.h>
+#include <cpu_arch.h>
 #include <stdlib.h>
 
 /**

@@ -1,13 +1,47 @@
-#ifndef INSTRUCTIONS_H_
-#define INSTRUCTIONS_H_
+#ifndef CPU_ARCH_H_
+#define CPU_ARCH_H_
 
 /**************************************************************************//**
- * @file     instructions.h
+ * @file     cpu_arch.h
  * @brief    Instructions enumerations and basic data types for processor.
  * @version  V0.2.0
  * @date     1. Dec 2024
  * @author   Matvey Rybalkin
 ******************************************************************************/
+
+/*---------------------------------------------------------------------------*/
+/*                              The CPU Architecture                         */
+/* Hoping for greatness, we've added multi-core support!                     */
+/*---------------------------------------------------------------------------*/
+
+/*----------------------------- Registers -----------------------------------*/
+/*    Number of Registers: 16 to 128 per core                                */
+/*    Address range (per core): 0x00 -> n                                    */
+/*    Registers are private to each core.                                    */
+/*---------------------------------------------------------------------------*/
+
+/*----------------------------- RAM -----------------------------------------*/
+/*    Shared memory accessible by all cores.                                */
+/*    Address range: n -> s                                                  */
+/*    Synchronization required for concurrent access.                        */
+/*---------------------------------------------------------------------------*/
+
+/*----------------------------- Stack ---------------------------------------*/
+/*    Private stack for each core, allocated within shared memory.           */
+/*    Address range (per core): s -> top                                     */
+/*    Each core manages its own stack pointer.                               */
+/*---------------------------------------------------------------------------*/
+/*                                                                           */
+/*    ^                                                                      */
+/*    |                                                                      */
+/*    |                                                                      */
+/*    Address growth direction (stack grows downward).                       */
+/*---------------------------------------------------------------------------*/
+
+/*----------------------------- Text ----------------------------------------*/
+/*    Executable instructions loaded into shared memory.                     */
+/*    Each core fetches instructions independently.                          */
+/*---------------------------------------------------------------------------*/
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -17,11 +51,6 @@
  * @brief System-wide data type for processing operations.
  */
 typedef int64_t sys_t;
-
-/**
- * @brief Null pointer representation for processor-specific definitions.
- */
-#define PROCESSOR_NULL_PTR 0U
 
 /**
  * @brief Enumeration of processor opcodes.
@@ -109,15 +138,6 @@ typedef struct {
 } __attribute__((packed)) instruction_t;
 
 /**
- * @brief Enumeration of operand types.
- * 
- * Represents the types of operands supported by the processor.
- */
-typedef enum {
-    PROCESSOR_OPERAND_ /**< Placeholder for operand type enumeration. */
-} operand_type_t;
-
-/**
  * @brief Binary code content type.
  * 
  * A pointer to an array of packed `instruction_t` structures.
@@ -150,4 +170,52 @@ typedef struct {
     asm_code_content_t content;  /**< Pointer to the assembly code content. */
 } asm_code_t;
 
-#endif // INSTRUCTIONS_H_
+#define REGISTER_AREA_SIZE(num_of_regs) (const size_t)(sizeof(sys_t) * num_of_regs)
+
+/**
+ * @brief CPU configuration structure.
+ * 
+ * This structure defines the configuration of the virtual CPU, including the
+ * number of registers and the size of RAM.
+ */
+typedef struct {
+    /**
+     * @brief Number of registers.
+     * 
+     * Specifies the total number of general-purpose registers available in
+     * the CPU. This value must be in the range 16  to 128.
+     */
+    const size_t R_size;
+
+    /**
+     * @brief Size of RAM in bytes.
+     * 
+     * Specifies the total size of the RAM available to the CPU. This memory
+     * is used for storing program data and dynamic allocations.
+     */
+    const size_t RAM_size;
+} cpu_conf_t;
+
+typedef struct {
+    sys_t ic;
+    sys_t flags;
+    size_t R_size;
+    sys_t* R;
+} core_t;
+
+typedef struct {
+    sys_t* RAM;
+
+} shared_memory_t;
+
+typedef struct {
+    core_t* cores;
+    
+} cpu_t;
+
+/**
+ * @brief Null pointer representation for processor-specific definitions.
+ */
+#define PROCESSOR_NULL_PTR 0U
+
+#endif // CPU_ARCH_H_

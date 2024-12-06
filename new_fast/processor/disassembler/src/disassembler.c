@@ -73,7 +73,7 @@ dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, const size_t 
                
             }
 
-            // not finished...
+            
 
         } else {
             return DASM_ERROR_OPCODE_INVALID;
