@@ -1,0 +1,3 @@
+[submodule "baobab/onegin/external/llibs"]
+	path = baobab/onegin/external/llibs
+	url = https://github.com/ElverseCorp/llibs
