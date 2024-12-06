@@ -1,2 +1,0 @@
-/home/robotsvision/Projects/MIPT/mipt/baobab/onegin/build/CMakeFiles/edit_cache.dir
-/home/robotsvision/Projects/MIPT/mipt/baobab/onegin/build/CMakeFiles/rebuild_cache.dir

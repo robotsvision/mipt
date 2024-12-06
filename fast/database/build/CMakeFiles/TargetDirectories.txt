@@ -1,3 +1,0 @@
-/home/robotsvision/Projects/MIPT/mipt/fast/database/build/CMakeFiles/tree.dir
-/home/robotsvision/Projects/MIPT/mipt/fast/database/build/CMakeFiles/edit_cache.dir
-/home/robotsvision/Projects/MIPT/mipt/fast/database/build/CMakeFiles/rebuild_cache.dir

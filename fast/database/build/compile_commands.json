@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/home/robotsvision/Projects/MIPT/mipt/fast/database/build",
-  "command": "/run/current-system/sw/bin/gcc -g -o CMakeFiles/tree.dir/src/database.c.o -c /home/robotsvision/Projects/MIPT/mipt/fast/database/src/database.c",
-  "file": "/home/robotsvision/Projects/MIPT/mipt/fast/database/src/database.c",
-  "output": "CMakeFiles/tree.dir/src/database.c.o"
-}
-]
