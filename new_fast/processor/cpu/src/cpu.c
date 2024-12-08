@@ -22,7 +22,7 @@ static inline int _deref_cpu_address(sys_t* value, cpu_t cpu, sys_t ptr) {
     return 0;
 }
 
-static void _execute_instruction(instruction_t instr) {
+static void _execute_instruction(instruction_2_ops_t instr) {
     switch (instr.opcode) {
         case PROCESSOR_OPCODE_ADD: {
 
@@ -75,10 +75,10 @@ cpu_t* cpu_create(const size_t ram_size) {
 
 void cpu_execute(cpu_t* restrict cpu, const bin_code_t code, const size_t bin_code_size) {
     
-    if (bin_code_size % sizeof(instruction_t) != 0)
+    if (bin_code_size % sizeof(instruction_2_ops_t) != 0)
         return;
 
-    const size_t num_of_instructions = bin_code_size / sizeof(instruction_t);
+    const size_t num_of_instructions = bin_code_size / sizeof(instruction_2_ops_t);
 
     _execute_instruction();
 }

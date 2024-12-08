@@ -22,6 +22,10 @@ static const char* _instruction_map[_PROCESSOR_OPCODE_NUM] = {
     [PROCESSOR_OPCODE_PUSH]     = "push",
     [PROCESSOR_OPCODE_POP]      = "pop",
 
+    [PROCESSOR_OPCODE_LBL]      = NULL,
+    [PROCESSOR_OPCODE_CALL]     = "call",
+    [PROCESSOR_OPCODE_RET]      = "ret",
+
     [PROCESSOR_OPCODE_PRINT]    = "prt",
 
     [PROCESSOR_OPCODE_INT]      = "int",

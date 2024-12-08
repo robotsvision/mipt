@@ -11,12 +11,12 @@ bin_code_t asm_code_generate(const void* src, size_t size) {
     if (UNLIKELY(
         src == NULL || 
         size == 0 || 
-        size % sizeof(instruction_t) != 0
+        size % sizeof(instruction_2_ops_t) != 0
         ))
     {
         return (bin_code_t){.content = NULL, .size = 0 };
     }
-    return (bin_code_t){ .content = (instruction_t*)(src), .size = size };
+    return (bin_code_t){ .content = (instruction_2_ops_t*)(src), .size = size };
 }
 
 dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, cpu_t* processor) {

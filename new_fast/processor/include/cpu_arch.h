@@ -121,7 +121,7 @@ extern const char* get_opcode_name(opcode_t opcode);
 /**
  * @brief Packed structure for a single processor instruction.
  * 
- * Encapsulates the opcode, operands, and flags for a single instruction.
+ * Encapsulates the opcode, 2 operands, and flags for a single instruction.
  */
 typedef struct {
     opcode_t    opcode  : 8;  /**< Operation code for the instruction. */
@@ -133,17 +133,18 @@ typedef struct {
 } __attribute__((packed)) instruction_2_ops_t;
 
 typedef struct {
-    opcode_t    opcode  : 8;  
-    uint32_t    label   : 24; 
-} __attribute__((packed)) instruction_label_t;
+    opcode_t    opcode  : 8;  /**< Operation code for the instruction. */
+    uint32_t    op      : 22; /**< First operand (22 bits). */
+    uint32_t    flags   : 2;  /**< Flags for the instruction. */
+} __attribute__((packed)) instruction_1_op_t;
 
 
 /**
  * @brief Binary code content type.
  * 
- * A pointer to an array of packed `instruction_t` structures.
+ * A pointer to an array of packed `instruction_2_ops_t` structures.
  */
-typedef instruction_t* bin_code_content_t;
+typedef instruction_2_ops_t* bin_code_content_t;
 
 /**
  * @brief Assembly code content type.
