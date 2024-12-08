@@ -19,7 +19,7 @@ bin_code_t asm_code_generate(const void* src, size_t size) {
     return (bin_code_t){ .content = (instruction_t*)(src), .size = size };
 }
 
-dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, const size_t src_size) {
+dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, cpu_t* processor) {
     
     if (UNLIKELY(dest == NULL))
         return DASM_ERROR_NO_DEST;
@@ -29,7 +29,7 @@ dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, const size_t 
 
     // \t [opcode] [operand], [operand] (\n or \0)
     const size_t each_line_max_length = 1 + 4 + 10 + 1 + 10 + 1; 
-    asm_code_content_t assembler_code = calloc(src_size, each_line_max_length);
+    asm_code_content_t assembler_code = calloc(src.size, each_line_max_length);
     
     if (UNLIKELY(assembler_code == NULL)) {
         return DASM_ERROR_ALLOC;
@@ -43,7 +43,7 @@ dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, const size_t 
     }
 
     asm_code_content_t dest_ptr = assembler_code;
-    for (size_t i = 0; i < src_size; ++i) {
+    for (size_t i = 0; i < src.size; ++i) {
         if (is_opcode_valid(src.content[i].opcode)) {
 
             (*dest_ptr) = '\t';
@@ -62,7 +62,7 @@ dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, const size_t 
             if (src.content[i].imm1 == true) {
                 dest_ptr += sprintf(dest_ptr, "%d", src.content[i].op1);
             } else {
-                if ()
+                
             }
 
             (*dest_ptr) = ' ';

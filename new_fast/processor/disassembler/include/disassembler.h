@@ -77,20 +77,6 @@ typedef enum {
  */
 extern bin_code_t bin_code_duplicate(const void* src, size_t size);
 
-/**
- * @brief Generates assembly code from binary code.
- * 
- * For transforming binary instructions into assembly representation, 
- * this function processes the source binary code and writes the result to the destination.
- * 
- * @param dest Pointer to an `asm_code_t` structure where the generated assembly code will be stored. Must not be `NULL`.
- * @param src The source binary code as a `bin_code_t` structure.
- * @param src_size The size of the source binary data in bytes. Must match the size of `src`.
- * @return A `dasm_error_t` indicating the result:
- * - `DASM_OK`: The operation was successful.
- * - `DASM_ERROR_NO_DEST`: The destination pointer is `NULL`.
- * - `DASM_ERROR_NO_SRC`: The source data is invalid.
- */
-extern dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, const size_t src_size);
+extern dasm_error_t dasm_generate(asm_code_t* dest, const bin_code_t src, cpu_t* processor);
 
 #endif // DISASSEMBLER_H_

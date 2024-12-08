@@ -80,9 +80,13 @@ typedef enum {
     PROCESSOR_OPCODE_PUSH   = 0x0E, /**< Push value onto the stack. */
     PROCESSOR_OPCODE_POP    = 0x0F, /**< Pop value from the stack. */
 
-    PROCESSOR_OPCODE_PRT    = 0x10, /**< Print a value to the output. */
+    PROCESSOR_OPCODE_LBL    = 0x10, /**< Label for jumping. */
+    PROCESSOR_OPCODE_CALL   = 0x11, /**< Call the functions */
+    PROCESSOR_OPCODE_RET    = 0x12, /**< Return back from functions */
 
-    PROCESSOR_OPCODE_INT    = 0x11, /**< Trigger an interrupt. */
+    PROCESSOR_OPCODE_PRT    = 0x13, /**< Print a value to the output. */
+
+    PROCESSOR_OPCODE_INT    = 0x14, /**< Trigger an interrupt. */
 
     _PROCESSOR_OPCODE_NUM   /**< Total number of opcodes. */
 } opcode_t;
@@ -115,15 +119,6 @@ extern bool is_opcode_valid(opcode_t opcode);
 extern const char* get_opcode_name(opcode_t opcode);
 
 /**
- * @brief Enumeration of processor interrupts.
- * 
- * Represents interrupt identifiers for system-level events.
- */
-typedef enum {
-    INTERRUPT_ /**< Placeholder for interrupt enumeration. */
-} interrupt_t;
-
-/**
  * @brief Packed structure for a single processor instruction.
  * 
  * Encapsulates the opcode, operands, and flags for a single instruction.
@@ -135,7 +130,13 @@ typedef struct {
     uint32_t    imm1    : 1;  /**< Immutable flag for first operand */
     uint32_t    imm2    : 1;  /**< Immutable flag for second operand */
     uint32_t    flags   : 2;  /**< Flags for the instruction. */
-} __attribute__((packed)) instruction_t;
+} __attribute__((packed)) instruction_2_ops_t;
+
+typedef struct {
+    opcode_t    opcode  : 8;  
+    uint32_t    label   : 24; 
+} __attribute__((packed)) instruction_label_t;
+
 
 /**
  * @brief Binary code content type.
@@ -170,7 +171,6 @@ typedef struct {
     asm_code_content_t content;  /**< Pointer to the assembly code content. */
 } asm_code_t;
 
-#define REGISTER_AREA_SIZE(num_of_regs) (const size_t)(sizeof(sys_t) * num_of_regs)
 
 /**
  * @brief CPU configuration structure.
@@ -204,18 +204,18 @@ typedef struct {
 } core_t;
 
 typedef struct {
+    size_t RAM_size;
     sys_t* RAM;
-
 } shared_memory_t;
 
 typedef struct {
     core_t* cores;
-    
+    shared_memory_t memory;
 } cpu_t;
 
 /**
  * @brief Null pointer representation for processor-specific definitions.
  */
-#define PROCESSOR_NULL_PTR 0U
+#define PROCESSOR_NULL_PTR 0
 
 #endif // CPU_ARCH_H_
