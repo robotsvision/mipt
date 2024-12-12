@@ -1,53 +1,74 @@
+
+/**
+ * @file stack.h
+ * @brief Dynamic stack implementation with additional safety and debug features.
+ * 
+ * This file contains the declarations for a flexible stack implementation,
+ * supporting dynamic resizing, canary-based memory protection, and more.
+ * 
+ * @version 3.0.0
+ * @date 12.12.24
+ * @author Matvey Rybalkin
+*/
+
+
 #ifndef STACK_H_
 #define STACK_H_
 
-#ifdef __cplusplus
-#   error "This file is only allowed to be used in C language assembly. For C++ use stack.hpp file"
-#endif
+/* ==================== Includes ==================== */
 
+#include <stddef.h>
 #include <stdint.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
-/**
- * @brief The maximum size of an operated type is limited 
- * by the maximum size of a type in the C language.
- */
-#define STACK_ELEMENT_MAX_SIZE sizeof(int64_t)
+/* ==================== Type definitions ==================== */
 
-#define STACK_INITIAL_SIZE 4096UL
-
-/**
- * @typedef stack_element_t
- * @brief Stack element type.
- */
-typedef int64_t stack_element_t;
-
-/**
- * @typedef stack_error_t
- * @brief Stack function errors enumeration.
- */
 typedef enum {
-    STACK_OK        = 0x00,
-    STACK_EXTENDED  = 0x01,
-    STACK_ERROR     = 0x02,
-} stack_error_t;
+    STACK_NO_HASH       = 0,
+    STACK_HASH_CRC32    = 1,
+    STACK_HASH_FNV      = 2,
+    STACK_HASH_MURMUR3  = 3,
+    STACK_HASH_JENKINS  = 4,
+    STACK_HASH_BLAKE2   = 5,
+    STACK_HASH_SHA3     = 6,
+    STACK_HASH_SHA256   = 7,
+} stack_function_type_t;
 
-/**
- * @typedef stack_t
- * @brief The structure contains all the information 
- * about the stack, you can create and destroy the stack.
- */
 typedef struct {
-    void* data;             /**< */
-    size_t sizeof_element;  /**< */
-    size_t capacity;        /**< */
-    size_t used;            /**< */
+    size_t size_of_element;
+    struct {
+        uint8_t use_canary           : 1;
+        uint8_t hash                 : 5;
+        uint8_t use_hardware_protect : 1;
+        uint8_t use_assert           : 1;
+    } __attribute__((packed)) protection;
+} stack_conf_t;
+
+typedef struct {
+    stack_conf_t configuration;
+    struct {
+        size_t mem_used;
+        size_t capacity;
+    } meta;
+    union {
+        uint8_t*  u8_data;
+        uint16_t* u16_data;
+        uint32_t* u32_data;
+        uint64_t* u64_data;
+        float*    float_data;
+        double*   double_data;
+        long double* ldouble_data;
+    } content;
 } stack_t;
 
-stack_error_t stack_create(stack_t* new_stack, size_t size_of_element);
-stack_error_t stack_destroy(stack_t* stack);
+#define STACK_DEFAULT_ALLOCATION 0UL
 
-stack_error_t stack_push(stack_t* stack, void* element);
-void* stack_pop(stack_t* stack);
+/* ==================== Public functions ==================== */
+
+stack_t* stack_create(const stack_conf_t configuration, size_t initial_size);
+void stack_destroy(stack_t* stack);
+
+bool stack_push(stack_t* stack, void* new_element);
+bool stack_pop(stack_t* stack, void* popped_element);
 
 #endif // STACK_H_

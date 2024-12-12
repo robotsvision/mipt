@@ -1,6 +1,10 @@
+
+/* ==================== Includes ==================== */
+
+#include <stdlib.h>
 #include <stack.h>
 
-// PRIVATE FUNCTIONS
+/* ==================== Private functions ==================== */
 
 #if defined(WIN32)
 #   include <windows.h>
@@ -10,12 +14,13 @@
 #   warning "The operating system is not defined or is not supported."
 #endif 
 
-static size_t _page_size = 0UL;
+static size_t _page_size = 0UL; 
 
-static void _get_page_size(void) {
+static __always_inline 
+void _get_page_size(void) {
     if (_page_size == 0UL) {
 #if defined(WIN32)
-        SYSTEM_INFO si;
+        static SYSTEM_INFO si;
         GetSystemInfo(&si);
         _page_size = (size_t)(si.dwPageSize);
 #elif defined(__linux__)
@@ -26,17 +31,30 @@ static void _get_page_size(void) {
     }
 }
 
-// PUBLIC FUNCTIONS
 
-stack_error_t stack_create(stack_t* new_stack, size_t size_of_element) {
-    if (new_stack == NULL || size_of_element == 0 || size_of_element > sizeof(int64_t)){
-        return STACK_ERROR;
+/* ==================== Public functions ==================== */
+
+stack_t* stack_create(stack_conf_t configuration, size_t initial_size) {
+    if (initial_size == STACK_DEFAULT_ALLOCATION) {
+        _get_page_size();
+        size_t allocation_size = _page_size;
     }
 
-    stack_t new_stack = (stack_t){
+    stack_t* new_stack = calloc(1, sizeof(stack_t));
 
-    };
+    // to be continured....
+    return NULL;
 }
 
-stack_error_t stack_destroy(stack_t* new_stack);
+void stack_destroy(stack_t* stack) {
+    free(stack);
+}
 
+
+bool stack_push(stack_t* stack, void* new_element) {
+    return false;
+}
+
+bool stack_pop(stack_t* stack, void* popped_element) {
+    return false;
+}
