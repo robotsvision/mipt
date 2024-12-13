@@ -38,7 +38,7 @@ typedef struct {
     size_t size_of_element;
     struct {
         uint8_t use_canary           : 1;
-        uint8_t hash                 : 5;
+        uint8_t hash_type            : 5;
         uint8_t use_hardware_protect : 1;
         uint8_t use_assert           : 1;
     } __attribute__((packed)) protection;
@@ -47,17 +47,16 @@ typedef struct {
 typedef struct {
     stack_conf_t configuration;
     struct {
-        size_t mem_used;
-        size_t capacity;
+        size_t top_index;
+        size_t allocated;
     } meta;
     union {
-        uint8_t*  u8_data;
-        uint16_t* u16_data;
-        uint32_t* u32_data;
-        uint64_t* u64_data;
-        float*    float_data;
-        double*   double_data;
-        long double* ldouble_data;
+        uint8_t*     data_8bit;
+        uint16_t*    data_16bit;
+        uint32_t*    data_32bit;
+        uint64_t*    data_64bit;
+        double*      data_double;
+        long double* data_long_double;
     } content;
 } stack_t;
 
@@ -65,10 +64,14 @@ typedef struct {
 
 /* ==================== Public functions ==================== */
 
-stack_t* stack_create(const stack_conf_t configuration, size_t initial_size);
-void stack_destroy(stack_t* stack);
+extern stack_t* stack_create(const stack_conf_t configuration, size_t initial_size);
+extern void stack_destroy(stack_t* stack);
 
-bool stack_push(stack_t* stack, void* new_element);
-bool stack_pop(stack_t* stack, void* popped_element);
+extern bool stack_push(stack_t* stack, void* new_element);
+extern bool stack_pop(stack_t* stack, void* popped_element);
+extern bool stack_peek(stack_t* stack, void* peeked_element);
+
+extern size_t stack_get_size(stack_t* stack);
+extern size_t stack_get_capacity(stack_t* stack);
 
 #endif // STACK_H_
