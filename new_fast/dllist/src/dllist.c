@@ -56,6 +56,30 @@ dllist_t* dllist_create(size_t num_of_elements, size_t size_of_element) {
             return NULL;
         }
     }
+
+    new_dllist->content.first_element = 0;
+    new_dllist->content.next_elements = calloc(num_of_elements, sizeof(size_t));
+    
+    if (new_dllist->content.next_elements == NULL) {
+        free(elements_new_buffer);
+        free(new_dllist);
+        return NULL;
+    }
+    
+    new_dllist->content.prev_elements = calloc(num_of_elements, sizeof(size_t));
+
+    if (new_dllist->content.prev_elements == NULL) {
+        free(new_dllist->content.next_elements);
+        free(elements_new_buffer);
+        free(new_dllist);
+        return NULL;
+    }
+
+    new_dllist->meta.last_index = 0;
+    new_dllist->meta.num_of_elements = num_of_elements;
+    new_dllist->size_of_element = size_of_element;
+
+    return new_dllist;
 }
 
 void dllist_destroy(dllist_t* list) {
@@ -108,8 +132,6 @@ size_t dllist_get_length(dllist_t* list) {
 
 void dllist_push_front(dllist_t* list, void* new_element) {
 
-    
-
 }
 
 void dllist_push_back(dllist_t* list, void* new_element) {
@@ -133,4 +155,3 @@ void dllist_get_element(dllist_t* list, size_t num_of_element, void* dest_elemen
 
 
 }
-

@@ -35,6 +35,7 @@ typedef struct {
             double*      data_double;
             long double* data_long_double;
         } list_elements;
+        size_t first_element;
         size_t* next_elements;
         size_t* prev_elements;
     } content;
