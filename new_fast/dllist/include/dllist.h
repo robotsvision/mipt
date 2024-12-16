@@ -45,7 +45,8 @@ extern dllist_t* dllist_create(size_t num_of_elements, size_t size_of_element);
 extern void dllist_destroy(dllist_t* list);
 extern bool dllist_is_empty(dllist_t* list);
 
-extern size_t dllist_get_size(dllist_t* list);
+extern size_t dllist_get_size_used_memory(dllist_t* list);
+extern size_t dllist_get_size_allocated_memory(dllist_t* list);
 extern size_t dllist_get_length(dllist_t* list);
 
 extern void dllist_push_front(dllist_t* list, void* new_element);
