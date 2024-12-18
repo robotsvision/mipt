@@ -83,37 +83,43 @@ dllist_t* dllist_create(size_t num_of_elements, size_t size_of_element) {
 }
 
 void dllist_destroy(dllist_t* list) {
+    if (list == NULL)
+        return;
+    
+    void* target_ptr = NULL;
     switch (list->size_of_element) {
         case (1UL):
-            free(list->content.list_elements.data_8bit);
+            target_ptr = list->content.list_elements.data_8bit;
             break;
 
         case (2UL):
-            free(list->content.list_elements.data_16bit);
+            target_ptr = list->content.list_elements.data_16bit;
             break;
 
         case (4UL):
-            free(list->content.list_elements.data_32bit);
+            target_ptr =list->content.list_elements.data_32bit;
             break;
 
         case (8UL):
-            free(list->content.list_elements.data_64bit);
+            target_ptr =list->content.list_elements.data_64bit;
             break;
 
 #   if (__SIZEOF_DOUBLE__ != 8UL)
         case (sizeof(double)):
-            free(list->content.list_elements.data_double);
+            target_ptr =list->content.list_elements.data_double;
             break;
 #   endif
 
         case (sizeof(long double)):
-            free(list->content.list_elements.data_long_double);
+            target_ptr =list->content.list_elements.data_long_double;
             break;
 
         default: {
             __builtin_unreachable();
         }
     }
+    if (target_ptr == NULL)
+        free(target_ptr);
     free(list);
 }
 
