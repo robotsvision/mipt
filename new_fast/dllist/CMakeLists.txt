@@ -5,6 +5,6 @@ add_library(dllist STATIC
     "src/dllist.c"
 )
 
-target_include_directories(dllist
+target_include_directories(dllist PUBLIC
     "include/"
 )

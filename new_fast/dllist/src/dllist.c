@@ -8,7 +8,7 @@
 
 dllist_t* dllist_create(size_t num_of_elements, size_t size_of_element) {
 
-    if ((num_of_elements | size_of_element) == NULL)
+    if ((num_of_elements | size_of_element) == 0UL)
         return NULL;
 
     dllist_t* new_dllist = calloc(1, sizeof(dllist_t));
@@ -132,16 +132,32 @@ size_t dllist_get_size_used_memory(dllist_t* list) {
 }
 
 size_t dllist_get_size_allocated_memory(dllist_t* list) {
+    return (list->meta._last_allocated_element * list->size_of_element);
 }
-size_t dllist_get_length(dllist_t* list);
 
-void dllist_push_front(dllist_t* list, void* new_element);
-void dllist_push_after(dllist_t* list, void* new_element);
-void dllist_push_before(dllist_t* list, void* new_element);
-void dllist_push_back(dllist_t* list, void* new_element);
+size_t dllist_get_length(dllist_t* list) {
+    return ((list->meta.last_index - 1)* list->size_of_element);
+}
 
-void dllist_pop_front(dllist_t* list, void* dest_element);
-void dllist_pop_n(dllist_t* list, void* new_element);
-void dllist_pop_back(dllist_t* list, void* dest_element);
+bool dllist_push_front(dllist_t* list, void* new_element) {
 
-void dllist_get_element(dllist_t* list, size_t num_of_element, void* dest_element);
+}
+
+bool dllist_push_after(dllist_t* list, void* new_element) {}
+bool dllist_push_before(dllist_t* list, void* new_element) {}
+bool dllist_push_back(dllist_t* list, void* new_element) {}
+
+bool dllist_pop_front(dllist_t* list, void* dest_element) {
+
+}
+
+bool dllist_pop_n(dllist_t* list, void* new_element) {}
+bool dllist_pop_back(dllist_t* list, void* dest_element) {}
+
+bool dllist_get_element(dllist_t* list, size_t num_of_element, void* dest_element) {
+    if (list == NULL || num_of_element > list->meta.last_index) {
+        return false;
+    }
+
+
+}
