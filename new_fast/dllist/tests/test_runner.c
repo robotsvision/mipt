@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void test_dllist_create_destroy();
-void test_dllist_is_empty();
-void test_dllist_push_pop();
-void test_dllist_memory_management();
-void test_dllist_length_invalid_access();
+extern void test_dllist_create_destroy();
+extern void test_dllist_is_empty();
+extern void test_dllist_push_pop();
+extern void test_dllist_memory_management();
+extern void test_dllist_length_invalid_access();
 
 void run_test(const char* test_name, void (*test_func)()) {
     printf("Running test: %s... ", test_name);

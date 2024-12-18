@@ -48,7 +48,7 @@ extern size_t dllist_get_size_used_memory(dllist_t* list);
 extern size_t dllist_get_size_allocated_memory(dllist_t* list);
 extern size_t dllist_get_length(dllist_t* list);
 
-extern void dllist_push_front(dllist_t* list, void* new_element)
+extern void dllist_push_front(dllist_t* list, void* new_element);
 extern void dllist_push_after(dllist_t* list, void* new_element);
 extern void dllist_push_before(dllist_t* list, void* new_element);
 extern void dllist_push_back(dllist_t* list, void* new_element);

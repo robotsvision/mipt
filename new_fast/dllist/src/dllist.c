@@ -126,11 +126,10 @@ size_t dllist_get_size_used_memory(dllist_t* list) {
 }
 
 size_t dllist_get_size_allocated_memory(dllist_t* list) {
-    return 
 }
 size_t dllist_get_length(dllist_t* list);
 
-void dllist_push_front(dllist_t* list, void* new_element)
+void dllist_push_front(dllist_t* list, void* new_element);
 void dllist_push_after(dllist_t* list, void* new_element);
 void dllist_push_before(dllist_t* list, void* new_element);
 void dllist_push_back(dllist_t* list, void* new_element);
