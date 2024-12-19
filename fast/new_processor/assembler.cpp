@@ -46,6 +46,7 @@ void assemble(const char* filename, generated_code_t* output) {
         };
         bool found_instruction = false;
 
+        // TODO: extract to a function
         for (size_t i = 0; i < NUM_INSTRUCTIONS; ++i) {
             if (strcmp(buffer, instructions_map[i].name) == 0) {
                 instruction.opcode = (opcode_t)i;
@@ -53,6 +54,29 @@ void assemble(const char* filename, generated_code_t* output) {
                 break;
             }
         }
+
+        // TODO: use continue/early return, avoid nesting too much if possible
+        //
+        //       {
+        //           if (is error)
+        //               return error; // or brake or continue depending on the case
+        //
+        //           code...;
+        //           when...;
+        //           no error...;
+        //       }
+        //
+        //       instead of
+        //
+        //       {
+        //           if (!is error) {
+        //               code...;
+        //               when...;
+        //               no error...;
+        //           } else {
+        //               return error; // or brake or continue depending on the case
+        //           }
+        //       }
 
         if (found_instruction) {
             int num_args = instructions_map[instruction.opcode].num_of_args;
@@ -65,6 +89,7 @@ void assemble(const char* filename, generated_code_t* output) {
                     .value = 0
                 };
 
+                // TODO: make this a function (e.g. read_argument)
                 if (buffer[0] == 'R') {
                     operand.reg = 1;
                     operand.value = atoll(buffer + 1);
@@ -85,6 +110,10 @@ void assemble(const char* filename, generated_code_t* output) {
             }
 
             if (output_offset + 1 + num_args >= output->size) {
+                // TODO: low level things should be extracted, they are hard to debug among higher-level things
+                //       I.e. you can make higher level functions like add/remove/... and handle low-level stuff there.
+                //       This is a very important thing for writing understandable code, remind me to elaborate
+                //       further when we meet.
                 output->output = (int64_t*)realloc(output->output, (output->size + 1024) * sizeof(int64_t));
                 output->size += 1024;
             }

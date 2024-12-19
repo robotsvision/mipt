@@ -1,6 +1,7 @@
 #include "assembler.h"
 #include <assert.h>
 #include <stdio.h>
+#include "disassembler.h"
 
 void write_generated_code_to_file(const char* filename, const generated_code_t* output) {
     assert(filename != NULL);
@@ -16,12 +17,17 @@ void write_generated_code_to_file(const char* filename, const generated_code_t* 
     fclose(file_descriptor);
 }
 
-int main(void) {
+int main(int argc, const char *argv[]) {
     generated_code_t assembler = (generated_code_t){
         .output = NULL,
         .size = 0UL,
     };
-    assemble("asm_example.asm", &assembler);
+    assemble(argv[1], &assembler);
     write_generated_code_to_file("OUTPUT.bin", &assembler);
+
+    // TODO: at least test it:
+    disassemble((instruction_t*)assembler.output, assembler.size);
+
+    // TODO: none of your .asm example are working, most of them don't even assemble without an error.
     return 0;
 }
