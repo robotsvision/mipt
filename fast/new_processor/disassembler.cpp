@@ -19,7 +19,7 @@ uint8_t _get_value_type(uint64_t operand) {
     return (uint8_t)(~(UINT64_MAX >> 8) & operand) >> ((sizeof(operand) - 1) * 8);
 }
 
-/*
+/* TODO: instead of commenting code, use git, it's a lot more powerful (stashes for such things, especially), but not now
 
 void disassemble(const char* buffer, size_t buffer_size) {
     // prints to stdout disassembly of buffer
@@ -61,6 +61,7 @@ void disassemble(instruction_t* instrns, size_t n) {
 
         size_t num_args = instructions_map[instrns[i].opcode].num_of_args;
         for (size_t j = 0; j < num_args; ++j) {
+            // TODO: make this a function
             if (instrns[i].operands[j].adr) {
                 putc('*', stdout);
             }
@@ -96,9 +97,10 @@ int disasemble_print(const char* filename) {
     }
 
     read(file_descriptor, file_buffer, file_size);
-    // file_buffer[file_size] = '\0'; // ?
+    // file_buffer[file_size] = '\0'; // ? // TODO: no, it's a stream of bytes, not a string
 
     // disassemble(file_buffer, file_size);
+    // TODO: finish this function, it's not that hard.
 
     return 0;
 }
