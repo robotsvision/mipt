@@ -37,23 +37,23 @@ typedef struct {
     /**
      * @brief Size of each element in bytes.
      */
-    size_t size_of_element;
+    size_t element_size;
 
     struct {
         /**
-         * @brief Index of the last allocated element.
+         * @brief Total capacity of the list (maximum number of elements).
          */
-        size_t _last_allocated_element;
+        size_t capacity;
 
         /**
-         * @brief Total number of elements currently in the list.
+         * @brief Current size of the list (number of used elements).
          */
-        size_t num_of_elements;
+        size_t size;
 
         /**
-         * @brief Index of the last valid element in the list.
+         * @brief Index of the last used element.
          */
-        size_t last_index;
+        size_t last_used_index;
     } meta;
 
     struct {
@@ -64,7 +64,7 @@ typedef struct {
             uint64_t*    data_64bit;      ///< Pointer to 64-bit elements.
             double*      data_double;     ///< Pointer to double elements.
             long double* data_long_double; ///< Pointer to long double elements.
-        } list_elements; ///< Union storing pointers to different data types.
+        } elements; ///< Union storing pointers to different data types.
 
         /**
          * @brief Index of the first element in the list.
@@ -82,6 +82,7 @@ typedef struct {
         size_t* prev_elements;
     } content;
 } dllist_t;
+
 
 /**
  * @brief Creates a new double linked list.
