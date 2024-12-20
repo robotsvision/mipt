@@ -50,7 +50,7 @@ typedef struct {
     uint64_t value : 61;
 } operand_t;
 
-struct { 
+struct { // TODO: ODR violation: you will define this map in every file you include it to, use "inline" or separate it to .cpp
     const char* name;
     int num_of_args;
     int args[3]; // unused
