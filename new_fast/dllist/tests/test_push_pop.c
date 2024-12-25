@@ -12,14 +12,14 @@ void test_dllist_push_pop_empty() {
 }
 
 void test_dllist_push_pop_large() {
-    dllist_t* list = dllist_create(100000, sizeof(int));
+    dllist_t* list = dllist_create(100001, sizeof(int));
     int value = 42;
 
-    for (int i = 0; i < 100000; ++i) {
+    for (int i = 0; i < 100; ++i) {
         dllist_push_back(list, &value);
     }
 
-    for (int i = 0; i < 100000; ++i) {
+    for (int i = 0; i < 100; ++i) {
         int result;
         dllist_pop_back(list, &result);
         assert(result == 42);

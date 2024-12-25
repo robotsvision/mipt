@@ -48,7 +48,7 @@ static size_t _get_last_index(dllist_t* list) {
 /* ==================== Public functions ==================== */
 
 dllist_t* dllist_create(size_t capacity, size_t element_size) {
-    if ((capacity | element_size) == 0UL || capacity > SIZE_MAX / element_size)
+    if (capacity == 0UL || element_size == 0UL || capacity > SIZE_MAX / element_size)
         return NULL;
 
     dllist_t* new_dllist = calloc(1, sizeof(dllist_t));
@@ -100,6 +100,7 @@ dllist_t* dllist_create(size_t capacity, size_t element_size) {
     new_dllist->meta.capacity = capacity;
     new_dllist->meta.size = 0;
     new_dllist->meta.last_used_index = DLLIST_END;
+    new_dllist->element_size = element_size;
 
     return new_dllist;
 }
@@ -117,17 +118,17 @@ void dllist_destroy(dllist_t* list) {
 
 bool dllist_is_empty(dllist_t* list) {
     if (!list) return 0UL;
-    return (bool)(list->meta.capacity == 0);
+    return (bool)(list->meta.size == 0);
 }
 
 size_t dllist_get_size_used_memory(dllist_t* list) {
     if (!list) return 0UL;
-    return (list->meta.capacity * list->element_size);
+    return (list->meta.size * list->element_size);
 }
 
 size_t dllist_get_size_allocated_memory(dllist_t* list) {
     if (!list) return 0UL;
-    return (list->meta.size * list->element_size);
+    return (list->meta.capacity * list->element_size);
 }
 
 size_t dllist_get_length(dllist_t* list) {
