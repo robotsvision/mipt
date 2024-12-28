@@ -13,7 +13,8 @@
 
 #ifdef __cplusplus
 #   include <cstdint>
-// size_t is a keyword.
+#   include <cstddef>
+#   include 
 #else
 #   include <stdint.h>
 #   include <stddef.h>
@@ -36,11 +37,23 @@ namespace stack {
 
 typedef enum {
     _S_L(ERROR_ALLOCATION),
-
+    // ...
 } _S_T(errors);
 
 typedef struct {
-
+    union {
+        uint8_t* data_8bit;
+        uint8_t* data_16bit;
+        uint8_t* data_32bit;
+        uint8_t* data_64bit;
+        double* data_double;
+        long double* data_ldouble;
+    } content;
+    struct {
+        size_t used;
+        size_t allocated;
+    } meta;
+    // for protection we should create struct.
 } _S_T(handler);
 
 
