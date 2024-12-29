@@ -14,7 +14,6 @@
 #ifdef __cplusplus
 #   include <cstdint>
 #   include <cstddef>
-#   include 
 #else
 #   include <stdint.h>
 #   include <stddef.h>
@@ -23,12 +22,12 @@
 /* ========= General C implementation ========= */
 
 #ifdef __cplusplus
-#define _S_T(name) stack_##name##_t
-#define _S_L(name) STACK_##name
-namespace stack {
-#else
 #define _S_T(name) name
 #define _S_L(name) name
+namespace stack {
+#else
+#define _S_T(name) stack_##name##_t
+#define _S_L(name) STACK_##name
 #endif
 
 // Stack headers
@@ -42,11 +41,11 @@ typedef enum {
 
 typedef struct {
     union {
-        uint8_t* data_8bit;
-        uint8_t* data_16bit;
-        uint8_t* data_32bit;
-        uint8_t* data_64bit;
-        double* data_double;
+        uint8_t*  data_8bit;
+        uint16_t* data_16bit;
+        uint32_t* data_32bit;
+        uint64_t* data_64bit;
+        double*   data_double;
         long double* data_ldouble;
     } content;
     struct {
@@ -66,9 +65,9 @@ typedef struct {
 /* ========= Class implementation ========= */
 
 #ifdef __cplusplus
-class stack {
+class container {
 private:
-    
+    stack::handler _handler;
 public:
 };
 #endif
