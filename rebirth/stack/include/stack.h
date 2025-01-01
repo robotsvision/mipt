@@ -6,12 +6,19 @@
  * @author Matvey Rybalkin
  */
 
+#ifdef STACK_USE_CPP
+#   ifndef __cplusplus
+#       error "You want to use the C++ version of the stack,\
+ but the current compilation is for the C language."
+#   endif
+#endif
+
 #ifndef STACK_H_
 #define STACK_H_
 
 /* ========= Include headers ========= */
 
-#ifdef __cplusplus
+#ifdef STACK_USE_CPP
 #   include <cstdint>
 #   include <cstddef>
 #else
@@ -21,7 +28,7 @@
 
 /* ========= General C implementation ========= */
 
-#ifdef __cplusplus
+#ifdef STACK_USE_CPP
 #define _S_T(name) name
 #define _S_L(name) name
 namespace stack {
@@ -56,7 +63,7 @@ typedef struct {
 } _S_T(handler);
 
 
-#ifdef __cplusplus
+#ifdef STACK_USE_CPP
 }
 #undef _S_T
 #undef _S_L
@@ -64,7 +71,7 @@ typedef struct {
 
 /* ========= Class implementation ========= */
 
-#ifdef __cplusplus
+#ifdef STACK_USE_CPP
 class container {
 private:
     stack::handler _handler;

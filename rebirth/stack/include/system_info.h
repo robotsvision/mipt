@@ -9,7 +9,7 @@
 #ifndef STACK_SYSTEM_INFO_H_
 #define STACK_SYSTEM_INFO_H_
 
-#ifdef __cplusplus
+#ifdef STACK_USE_CPP
 #   include <cassert>
 #else
 #   include <assert.h>
