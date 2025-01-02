@@ -1,13 +1,13 @@
 
 /**
- * @file system_info.h
+ * @file utils/macro.h
  * @brief 
  * @version 3.0.0
  * @author Matvey Rybalkin
  */
 
-#ifndef STACK_SYSTEM_INFO_H_
-#define STACK_SYSTEM_INFO_H_
+#ifndef STACK_MACRO_H_
+#define STACK_MACRO_H_
 
 #ifdef STACK_USE_CPP
 #   include <cassert>
@@ -49,7 +49,4 @@
 #   define STATIC_ASSERT(cond, msg) _Static_assert(cond, msg)
 #endif
 
-extern atomic_size_t _sysinfo_mempage_size;
-extern void sysinfo_mempage_update(void);
-
-#endif // STACK_SYSTEM_INFO_H_
+#endif // STACK_MACRO_H_

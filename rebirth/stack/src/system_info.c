@@ -1,11 +1,5 @@
-/*
-    Supported OSs:
-        1. Windows
-        2. Linux
-*/
-
-
-#include <system_info.h>
+#include <utils/macro.h>
+#include <utils/system_info.h>
 
 /* ========= Operating system list ========= */
 
@@ -40,15 +34,15 @@ FORCE_INLINE size_t _get_mempage_size(void) {
 
 /* ========= Cross-platform declaration ========= */
 
-atomic_size_t _mempage_size = 0UL;
+atomic_size_t _sysinfo_mempage_size = 0UL;
 
 void sysinfo_mempage_update(void) {
     static size_t cached_size = 0UL;
     if (LIKELY(cached_size != 0UL)) {
-        _mempage_size = cached_size;
+        _sysinfo_mempage_size = cached_size;
         return;
     }
     size_t data = _get_mempage_size();
-    atomic_store(&_mempage_size, data);
+    atomic_store(&_sysinfo_mempage_size, data);
     cached_size = data;
 }
