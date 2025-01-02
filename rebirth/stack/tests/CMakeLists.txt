@@ -3,6 +3,8 @@ project(StackTests)
 
 add_executable(run_tests
     "main.cpp"
+    "stack.cpp"
+    "system_info.c"
 )
 
 add_library(stack SHARED

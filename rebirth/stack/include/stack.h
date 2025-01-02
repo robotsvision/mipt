@@ -1,4 +1,4 @@
-
+#define STACK_USE_CPP
 /**
  * @file stack.h
  * @brief 
@@ -40,11 +40,12 @@ namespace stack {
 // Stack headers
 #include "errors.h"
 #include "protection.h"
+#include "system_info.h"
 
 typedef enum {
     _S_L(ERROR_ALLOCATION),
     // ...
-} _S_T(errors);
+} _S_T(error);
 
 typedef struct {
     union {
@@ -76,6 +77,8 @@ class container {
 private:
     stack::handler _handler;
 public:
+    //stack::error create(size_t initial_size = );
+
 };
 #endif
 

@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "*.txt": "plaintext",
-        "typeinfo": "cpp",
-        "chrono": "cpp",
-        "text_encoding": "cpp",
-        "cassert": "cpp"
-    }
-}
