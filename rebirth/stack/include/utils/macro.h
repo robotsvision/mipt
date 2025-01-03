@@ -49,4 +49,15 @@
 #   define STATIC_ASSERT(cond, msg) _Static_assert(cond, msg)
 #endif
 
+#if  defined(_MSC_VER)
+#    define PACKED_STRUCT(name) __pragma(pack(push, 1)) name __pragma(pack(pop))
+#    define ALIGNED(x) __declspec(align(x))
+#    define DEPRECATED __declspec(deprecated)
+#elif defined(__GNUC__) || defined(__clang__)
+#    define PACKED_STRUCT(name) name __attribute__((packed))
+#    define ALIGNED(x) __attribute__((aligned(x)))
+#    define DEPRECATED __attribute__((deprecated))
+#endif
+
+
 #endif // STACK_MACRO_H_
