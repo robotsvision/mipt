@@ -5,22 +5,32 @@
 
 #ifndef STACK_PROTECTION_H_
 #define STACK_PROTECTION_H_
+
+#include <utils/macro.h>
+
 #ifdef STACK_USE_CPP
-#define _S_T(name) name
-#define _S_L(name) name
+#define _SP_T(name) name
+#define _SP_L(name) name
 namespace stack {
+namespace protection {
 #else
-#define _S_T(name) stack_##name##_t
-#define _S_L(name) STACK_##name
+#define _SP_T(name) stack_protect_##name##_t
+#define _SP_L(name) STACK_PROTECT_##name
 #endif
 
 typedef struct {
+    uint8_t canary : 1;
+} PACKED_STRUCT(_SP_T(config));
 
-} _S_T(protect_conf);
+typedef struct {
+
+} _SP_T(meta);
+
 
 #ifdef STACK_USE_CPP
-}
-#undef _S_T
-#undef _S_L
+} // protection::
+} // stack::
+#undef _SP_T
+#undef _SP_L
 #endif
 #endif // STACK_PROTECTION_H_

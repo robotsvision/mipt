@@ -1,4 +1,4 @@
-#define STACK_USE_CPP
+
 /**
  * @file stack.h
  * @brief 
@@ -23,6 +23,7 @@
 #   include <cstddef>
 #else
 #   include <stdint.h>
+#   include <stdbool.h>
 #   include <stddef.h>
 #endif
 
@@ -49,15 +50,18 @@ typedef enum {
 } _S_T(error);
 
 typedef struct {
-    size_t size;
+    size_t size_of_element;
 } _S_T(config);
 
 typedef struct {
     size_t size;
+    size_t allocated;
+    size_t size_of_element;
 } _S_T(state);
 
 typedef struct {
     union {
+        void* data_unaligned;
         uint8_t*  data_8bit;
         uint16_t* data_16bit;
         uint32_t* data_32bit;
@@ -69,7 +73,9 @@ typedef struct {
         size_t used;
         size_t allocated;
     } meta;
-    // for protection we should create struct.
+#ifdef STACK_USE_PROTECTION
+    
+#endif
 } _S_T(handler);
 
 
