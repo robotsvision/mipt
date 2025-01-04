@@ -6,11 +6,9 @@
  * @author Matvey Rybalkin
  */
 
-#ifdef STACK_USE_CPP
-#   ifndef __cplusplus
-#       error "You want to use the C++ version of the stack,\
+#if defined(STACK_USE_CPP) && !defined(__cplusplus)
+#    error "You want to use the C++ version of the stack,\
  but the current compilation is for the C language."
-#   endif
 #endif
 
 #ifndef STACK_H_
@@ -30,34 +28,43 @@
 // Stack headers
 #include "utils/macro.h"
 #include "utils/system_info.h"
-#include "stack/errors.h"
-#include "stack/protection.h"
 
 /* ========= General C implementation ========= */
 
 #ifdef STACK_USE_CPP
-#define _S_T(name) name
-#define _S_L(name) name
+#define _S_T(subname, name) name
+#define _S_L(subname,name) name
 namespace stack {
 #else
-#define _S_T(name) stack_##name##_t
-#define _S_L(name) STACK_##name
+#define _S_T(subname,name) stack##subname##name##_t
+#define _S_L(subname,name) STACK##subname##name
 #endif
 
+#include "stack/errors.h"
+#include "stack/protection.h"
+
 typedef enum {
-    _S_L(ERROR_ALLOCATION),
+    _S_L(_, ERROR_ALLOCATION),
     // ...
-} _S_T(error);
+} _S_T(_, error);
+
+typedef enum {
+    _S_L(_, DEFAULT_NUMBER_OF_ELEMENTS),
+} _S_T(_, num_of_elements);
 
 typedef struct {
     size_t size_of_element;
-} _S_T(config);
+    _S_T(_, num_of_elements) num_of_elements;
+#ifdef STACK_USE_PROTECTION
+    _S_T(_protect_, config) protect_config;
+#endif
+} _S_T(_, config);
 
 typedef struct {
     size_t size;
     size_t allocated;
     size_t size_of_element;
-} _S_T(state);
+} _S_T(_, state);
 
 typedef struct {
     union {
@@ -66,7 +73,9 @@ typedef struct {
         uint16_t* data_16bit;
         uint32_t* data_32bit;
         uint64_t* data_64bit;
+#if __SIZEOF_DOUBLE__ != 8UL
         double*   data_double;
+#endif
         long double* data_ldouble;
     } content;
     struct {
@@ -76,7 +85,7 @@ typedef struct {
 #ifdef STACK_USE_PROTECTION
     
 #endif
-} _S_T(handler);
+} _S_T(_, handler);
 
 
 #ifdef STACK_USE_CPP
@@ -89,7 +98,7 @@ typedef struct {
 
 /* ========= C version ========= */
 
-stack_handler_t* stack_create(size_t num_of_elements, size_t size_of_element);
+stack_handler_t* stack_create(stack_config_t config);
 void stack_destroy(stack_handler_t* stack);
 
 stack_error_t stack_push(stack_handler_t* stack, void* new_element);
