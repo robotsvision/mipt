@@ -19,9 +19,11 @@
 #ifdef STACK_USE_CPP
 #   include <cstdint>
 #   include <cstddef>
+#   include <cstdio>
 #else
 #   include <stdint.h>
 #   include <stdbool.h>
+#   include <stdio.h>
 #   include <stddef.h>
 #endif
 
@@ -33,11 +35,13 @@
 
 #ifdef STACK_USE_CPP
 #define _S_T(subname, name) name
-#define _S_L(subname,name) name
+#define _S_L(subname, name) name
+#define _STL(type) std::##type
 namespace stack {
 #else
 #define _S_T(subname,name) stack##subname##name##_t
 #define _S_L(subname,name) STACK##subname##name
+#define _STL(type) type
 #endif
 
 #include "stack/errors.h"
@@ -108,6 +112,9 @@ char* stack_dump(stack_handler_t* stack);
 
 size_t stack_get_state(stack_config_t* config);
 bool stack_is_empty(stack_handler_t* stack);
+
+const char* stack_str_error(stack_handler_t* handler);
+void stack_prt_error(_STL(FILE*) stream, stack_handler_t* handler, const char* prefix);
 
 #else
 
