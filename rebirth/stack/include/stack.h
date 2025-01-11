@@ -114,11 +114,12 @@ size_t stack_get_state(stack_config_t* config);
 bool stack_is_empty(stack_handler_t* stack);
 
 const char* stack_str_error(stack_handler_t* handler);
-void stack_prt_error(_STL(FILE*) stream, stack_handler_t* handler, const char* prefix);
+void stack_fput_error(_STL(FILE*) stream, stack_handler_t* handler, const char* prefix);
 
 #else
 
 /* ========= C++ version ========= */
+
 namespace stack {
 template <typename T>
 class container {
@@ -127,8 +128,8 @@ private:
 public:
     container(void);
     container(size_t initial_size);
-    stack::error create(size_t initial_size);
-    stack::error create(stack::config conf);
+    stack::handler create(size_t initial_size);
+    stack::handler create(stack::config conf);
 
     void push(const T& element);
     T pop(void);
@@ -138,6 +139,11 @@ public:
 
     size_t length(void);
     size_t size(void);
+
+    const char* str_error(stack::handler handler);
+    const char* str_error(std::ostream& stream, stack_handler_t* handler, const char* prefix = "");
+
+    ~container();
 };
 }
 #endif
